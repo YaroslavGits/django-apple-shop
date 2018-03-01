@@ -1,0 +1,50 @@
+html, body{
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    max-width: 100%;
+
+}
+.general-container {
+        display: table;
+        height: 100%;
+        width: 100%;
+        padding: 200px 0;
+        background:black url("media/background/intro-bg.jpg")no-repeat bottom center scroll;
+        text-align: center;
+        background-size: cover;
+
+
+}
+.container{
+    vertical-align: middle;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Cabin,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+.title{
+    font-size: 70px;
+    color: white;
+}
+.form-control{
+    font-size: 15px;
+    margin-top: 0;
+}
+.form-group
+{
+    display: block;
+    color: white;
+}
+.form-inline{
+    color: black;
+
+}
+.text{
+    font-family: Cabin,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 100;
+}
+input{
+    border: 0;
+    background-color: transparent;
+}

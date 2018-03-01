@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="text-center">Your contacts</h1>
+            </div>
+            {% for price in products_in_basket %}
+                <form id="form_contact"  method="post" class="form-inline text-center" data-total_price="{{ price.price_all }}" action="{% url 'payment' %}">{% csrf_token %}
+                    <div class="name text-center">
+                        <span class="form-errors">{{ form.name.errors }}</span>
+                        <label>Name: </label>
+                        <input type="text" class="form-control" name="{{ form.name.html_name }}" value="{{ request.POST.name }}">
+                    </div>
+                    <div class="email text-center">
+                        <span class="form-errors">{{ form.email.errors }}</span>
+                        <label>Email: </label>
+                        <input type="text" class="form-control" name="{{ form.email.html_name }}" value="{{ request.POST.email }}">
+                    </div>
+                    <div class="phone text-center">
+                        <span class="form-errors">{{ form.phone.errors }}</span>
+                        <label>Phone: </label>
+                        <input id="phone" type="text" class="form-control" name="{{ form.phone.html_name }}" value="{{ request.POST.phone }}">
+                    </div>
+                    <div class="address text-center">
+                        <span class="form-errors">{{ form.address.errors }}</span>
+                        <label>Address: </label>
+                        <input type="text" class="form-control" name="{{ form.address.html_name }}" value="{{ request.POST.address }}">
+                    </div>
+                    <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td><h3>Delivery Type: </h3></td>
+                                        <td><h3>Price for delivery type:</h3></td>
+                                        <td><h3>Total order price:</h3></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="delivery_type" class="form-control">
+                                                {% for Delivery in delivery %}
+                                                    <option value="{{ Delivery.price_for_delivery_type }}">{{ Delivery.delivery_type }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td class="price_for_delivery_type"><h4>50.00</h4></td>
+                                        <td class="amount_price"><h4>{{ price.price_all }}</h4></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                    <div class="text-center">
+                        <button type="submit" class="btn">Checkout</button>
+                    </div>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

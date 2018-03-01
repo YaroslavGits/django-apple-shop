@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'land.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="general-container">
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="brend-hending">
+                    <h1 class="title" >Our store will soon open</h1>
+                    <h1 class="title" >Please send us your email </h1>
+                    <div class="form-group">
+                        <form action="" method="post" class="form-inline" role="form">{% csrf_token %}
+                            <div class="form-inline form-control input-lg text-center">
+                                <label class="text">Name: </label>
+                                {{ form.sabscriber_name}}
+                            </div>
+                            <div class="form-control input-lg form-inline text-center">
+                                <label class="text">Email: </label>
+                                {{ form.sabscriber_email }}
+                            </div>
+
+                            <div class="button">
+                                <button type="submit" class="btn btn-lg btn-default">Subscribe</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    </header>
+
+</div>
+</body>
+
+</html>

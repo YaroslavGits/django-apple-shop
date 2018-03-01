@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static "home.css" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="wrapper">
+        <div class="wrapper-content">
+            {% include 'navbar.html' %}
+            <form id="form_buying_products" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
+            </form>
+                    {% block content %}
+                    {% endblock content %}
+
+
+        </div>
+
+    {% include 'footer.html' %}
+
+</div>
+
+<script src="{% static 'Js/jQuery.js' %}"></script>
+
+</body>
+
+</html>

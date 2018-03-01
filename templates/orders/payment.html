@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center">Payment</h1>
+    <div class="card-wrapper" data-jp-card-initialized="true">
+        <div class="jp-card-container">
+            <div class="jp-card">
+                <div class="jp-card-front">
+                    <div class="jp-card-lower">
+                        <div class="jp-card-shiny"></div>
+                        <div class="jp-card-cvc jp-card-display"></div>
+                        <div class="jp-card-number jp-card-display">•••• •••• •••• ••••</div>
+                        <div class="jp-card-name jp-card-display">Full Name</div>
+                        <div class="jp-card-expiry jp-card-display" data-before="month/year" data-after="validthru">••/••</div>
+                    </div>
+                </div>
+                <div class="jp-card-back">
+                    <div class="jp-card-bar"></div>
+                    <div class="jp-card-cvc jp-card-display">•••</div>
+                    <div class="jp-card-shiny"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="payment" method="post" class="form-inline text-center" action="{% url 'home' %}">{% csrf_token %}
+        <div class="cl-lg-12">
+                <input class="form-control payment-form" type="text" name="number_cart" placeholder="Card Number" required >
+                <input class="form-control payment-form" type="text" name="name_user" placeholder="Full Name" required>
+        </div>
+        <div class="cl-lg-12">
+                <input class="form-control payment-form" type="text" name="expiry" placeholder="MM/YY" required>
+                <input class="form-control payment-form" type="text" name="cvc" placeholder="CVC" required>
+        </div>
+        <button class="btn btn-round payment-form" type="submit">Submit</button>
+    </form>
+{% endblock content %}

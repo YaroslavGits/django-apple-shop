@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="sections">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="block_slider text-right">
+                        <div class="slider">
+                            <a class="slick-prev slick-arrow" aria-label="Previous" role="button" style="display: block;"><h2><</h2></a>
+                            <ul>
+                                {% for image_all in products.productimage_set.all %}
+                                    <li><img src="{{ image_all.image.url }}" class="Image-responsive" alt=" "></li>
+                                {% endfor %}
+                            </ul>
+                            <a class="slick-next slick-arrow" aria-label="Next" role="button" style="display: block;"><h2>></h2></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="Name text-center">{{ products.name }}</h1>
+                    <div class="">
+                            {% if  products.discount %}
+                            <h4 class="discount price-item">{{ products.price }}$</h4>
+                            {% endif %}
+                            <h4 class="price">Price: {{ products.discount_price }}$</h4>
+                    </div>
+                    <form id="form_buying_product{{ product_id }}" method="post" class="form-inline" data-product_id="{{ products.id }}" data-product_name="{{ products.name }}" data-price="{{ products.discount_price }}" action="{% url 'basket_adding' %}">{% csrf_token %}
+                        <div class="number">
+                            <label>Namber:</label>
+                            <div>
+                                <input type="hidden" name="product_id" value="{{ product_id }}">
+                                <input type="number" class="form-control" id="number" value="1" min="1" max="10">
+                            </div>
+                            <div>
+                                <button id="submit_btn" type="submit" class="btn button-primary btn-round">ADD TO CART</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        <h4>
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                            <li role="presentation"><a href="#characteristics" aria-controls="characteristics" role="tab" data-toggle="tab">Characteristics</a></li>
+                            <li role="presentation"><a href="#delivery" aria-controls="delivery" role="tab" data-toggle="tab">Delivery</a></li>
+                          </ul>
+                          <!-- Tab panes -->
+                          <div class="tab-content tab-top">
+                            <div role="tabpanel" class="tab-pane active" id="description">{{ products.comments }}</div>
+                            <div role="tabpanel" class="tab-pane" id="characteristics">{{ products.description }}</div>
+                            <div role="tabpanel" class="tab-pane" id="delivery"><h4>How we delivery products?</h4></div>
+                          </div>
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

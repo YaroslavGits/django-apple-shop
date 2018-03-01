@@ -1,0 +1,64 @@
+{% load static %}
+<nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'home' %}"><img src="{% static 'Photo/120px-Home_font_awesome.svg.png' %}" class="image_responsive"></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h4>Category<span class="caret"></span></h4></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'laptop' %}"><h4>Laptop</h4></a></li>
+                <li><a href="{% url 'iphone' %}"><h4>iPhone</h4></a></li>
+                <li><a href="{% url 'ipad' %}"><h4>iPad</h4></a></li>
+                <li><a href="{% url 'imac' %}"><h4>iMac</h4></a></li>
+{#                <li role="separator" class="divider"></li>#}
+{#                <li class="dropdown-header">Nav header</li>#}
+{#                <li><a href="#">Separated link</a></li>#}
+{#                <li><a href="#">One more separated link</a></li>#}
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle drop-down-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <h4>CART<span id="basket_total_number">
+                                {% if products_total_number %}
+                                    ({{ products_total_number }})
+                                {% else %}
+                                    (0)
+                                {% endif %}
+                            </span>
+                        <span class="caret"></span>
+                    </h4>
+                </a>
+                <ul class="dropdown-menu basket-item">
+                    <li class="position-text"><h4><label>You Cart!</label></h4></li>
+                    <h4>
+                    {% for product_in_basket in products_in_basket %}
+                        <li>{{ product_in_basket.product.name }} {{ product_in_basket.number }} piece {{ product_in_basket.price_all }} $ <label class="delete_item" data-product_id="{{ product_in_basket.id }}">x</label></li>
+                    {% endfor %}
+                    </h4>
+                    <div class="checkout text-right">
+                        <a href="{% url 'checkout' %}" class="text-right">
+                        <button type="submit" class="btn btn-round btn-retreat">GO CART</button>
+                        </a>
+                    </div>
+                </ul>
+            </li>
+{#            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>#}
+{#            <li><a href="../navbar-fixed-top/">Fixed top</a></li>#}
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+            <link rel="stylesheet" href="{% static "home.css" %}">
+    </nav>

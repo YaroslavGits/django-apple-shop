@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+<div class="Slider">
+    <div id="home">
+      <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#home-slider" data-slide-to="0" class="active"></li>
+          <li data-target="#home-slider" data-slide-to="1"></li>
+          <li data-target="#home-slider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active" style="background: url('{% static 'media/image/img01.jpg' %}');">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="carousel-content">
+                      <h1 class="animated fadeInUpBig text-center text-black text-preview">Hello!</h1>
+                      <h1 class="animated rollIn text-black text-center mini-text-preview">Welcome to our shop.</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item" style="background: url('{% static 'media/image/img02.jpg' %}');">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="carousel-content">
+                  	<h2 class="animated fadeInLeftBig text-left">About us</h2>
+					<h4 class="animated fadeInDownBig text-left">We always think about our customers.<br> Your comfort is very important to us.</h4>
+					<a class="btn btn-warning btn-lg animated fadeInRight" href="{% url 'about' %}">Learn more &raquo;</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#home-slider" data-slide="prev">
+            <i class="fa fa-angle-left"><h1><</h1></i>
+        </a>
+        <a class="right carousel-control" href="#home-slider" data-slide="next">
+            <i class="fa fa-angle-right"><h1>></h1></i>
+        </a>
+        <div class="pattern"></div>
+      </div>
+
+    </div>
+</div>
+</div>
+    <div class="section section1">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center text-main">CATEGORY</h1>
+                {% for cat in category %}
+                    <div class="col-lg-3">
+                        <a class="tile-link" href="{{ cat.category_url }}">
+                            <div class="product-item1">
+                            <div>
+                                <img src="{{ cat.category_image.url }}" class="image-responsive"/>
+                            </div>
+                            <h4>{{ cat.category_name }}</h4>
+                        </div>
+                        </a>
+                     </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="section info-section" style="background: url('{% static 'media/image/bg.jpg' %}'); background-size: cover">
+        <h3 class="info-text">INFO</h3>
+    </div>
+    <div class="section section2">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center text-main">NEW ARRIVAL</h1>
+                    {% for prodimg in products_image %}
+                        <div class="col-lg-3">
+                                <div class="product-item ">
+                                    <div>
+                                        <a href="{% url 'product' prodimg.product.id %}">
+                                        <img src="{{ prodimg.image.url }}" class="images-responsive"/>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        {% if  prodimg.product.discount %}
+                                        <span class="discount-container">{{ prodimg.product.discount }}%</span>
+                                        {% endif %}
+                                    </div>
+                                    <h4 class="text">{{ prodimg.product.name }}</h4>
+                                    <div class="price-container">
+                                        {% if  prodimg.product.discount %}
+                                        <h5 class="discount">{{ prodimg.product.price }}$</h5>
+                                        {% endif %}
+                                        <h4 class="price"> {{ prodimg.product.discount_price }}$</h4>
+                                    </div>
+                                    <form id="form_buying_product_{{ prodimg.product.id }}" method="post" class="form-inline" data-product_id="{{ prodimg.product.id }}" data-product_name="{{ prodimg.product.name }}" data-price="{{ prodimg.product.discount_price }}" action="{% url 'basket_adding' %}">{% csrf_token %}
+                                            <input type='hidden' name="product_id" value="{{ prodimg.product.id }}">
+                                            <input type='hidden' id="number" value="1">
+                                            <button id="submit_btn" type="submit" class="btn btn-primary btn-round">ADD TO CART</button>
+                                    </form>
+                            </div>
+                         </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="section section3">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center text-main">iPhone</h1>
+                {% for prodimg in product_image %}
+                        <div class="col-lg-3">
+                            <div class="product-item ">
+                                <div>
+                                    <a href="{% url 'product' prodimg.product.id %}">
+                                    <img src="{{ prodimg.image.url }}" class="images-responsive"/>
+                                    </a>
+                                </div>
+                                <div>
+                                    {% if  prodimg.product.discount %}
+                                    <span class="discount-container">{{ prodimg.product.discount }}%</span>
+                                    {% endif %}
+                                </div>
+                                <h4 class="text">{{ prodimg.product.name }}</h4>
+                                <div class="price-container">
+                                    {% if  prodimg.product.discount %}
+                                    <h5 class="discount">{{ prodimg.product.price }}$</h5>
+                                    {% endif %}
+                                    <h4 class="price"> {{ prodimg.product.discount_price }}$</h4>
+                                </div>
+                                <form id="form_buying_product_{{ prodimg.product.id }}" method="post" class="form-inline" data-product_id="{{ prodimg.product.id }}" data-product_name="{{ prodimg.product.name }}" data-price="{{ prodimg.product.discount_price }}" action="{% url 'basket_adding' %}">{% csrf_token %}
+                                            <input type='hidden' name="product_id" value="{{ prodimg.product.id }}">
+                                            <input type='hidden' id="number" value="1">
+                                            <button id="submit_btn" type="submit" class="btn btn-primary btn-round">ADD TO CART</button>
+                                    </form>
+                            </div>
+                         </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
