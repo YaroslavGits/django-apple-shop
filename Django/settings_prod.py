@@ -9,6 +9,6 @@ DATABASES = {
         'USER': 'usershop',
         'PASSWORD': 'security_database_root',
         'HOST': '127.0.0.1',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
