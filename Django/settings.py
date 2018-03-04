@@ -25,7 +25,7 @@ SECRET_KEY = 'ilpcx5d2ki_oldh@%z%2l=%8&wx%-zgd$$gn9mdi0e5igf*1i!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'appleshopdjango.pythonanywhere.com']
 
 
 # Application definition
@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'EN-en'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -143,7 +143,7 @@ MEDIA_ROOT = "D:/Django/static/media"
 
 MEDIA_URL = '/ media /'
 
-try:
-    from .settings_prod import *
-except:
-    pass
+# try:
+#     from .settings_prod import *
+# except:
+#     pass
