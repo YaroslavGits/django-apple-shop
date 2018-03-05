@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ilpcx5d2ki_oldh@%z%2l=%8&wx%-zgd$$gn9mdi0e5igf*1i!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [u'appleshopdjango.pythonanywhere.com']
+ALLOWED_HOSTS = ["appleshopdjango.pythonanywhere.com", ]
 
 
 # Application definition
@@ -81,8 +81,14 @@ WSGI_APPLICATION = 'Django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'appleshopdjango$my_project',
+        'USER': 'appleshopdjango',
+        'PASSWORD': 'DB_passw0rd',
+        'HOST': 'appleshopdjango.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 
@@ -131,17 +137,17 @@ STATICFILES_FINDERS = [
 
 ]
 
-STATIC_URL = '/ static /'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static",)
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static", "media/../static/Photo")
+STATIC_ROOT = "/home/appleshopdjango/Django_env/Django/static"
 
-MEDIA_ROOT = "D:/Django/static/media"
+MEDIA_ROOT = "/home/appleshopdjango/Django_env/Django/static/media"
 
-MEDIA_URL = '/ media /'
+MEDIA_URL = '/media/'
 
 # try:
 #     from .settings_prod import *
