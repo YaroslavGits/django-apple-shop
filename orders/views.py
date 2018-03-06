@@ -48,6 +48,10 @@ def contact(request):
     session_key = request.session.session_key
     delivery = Delivery.objects.filter(status_delivery_type=True)
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
+    basket_product = 0
+    for product_basket in products_in_basket:
+        basket_product += product_basket.price_all
+
     form =ContactForm(request.POST or None)
     if request.POST:
         print(request.POST)
