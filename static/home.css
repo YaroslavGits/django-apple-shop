@@ -12,9 +12,10 @@ html {
 .wrapper{
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
 }
 .wrapper-content{
+    height: 100%;
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: auto;
