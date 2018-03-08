@@ -21,7 +21,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, default=None)
     price = models.FloatField(blank=True, null=True, default=0)
     discount = models.IntegerField(default=0)
-    discount_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    discount_price = models.FloatField(blank=True, null=True,  default=0)
     is_active = models.BooleanField(default=True)
     comments = models.TextField(blank=True, null=True, default=None)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -33,11 +33,11 @@ class Product(models.Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
-    def save(self, *args, **kwargs):
+    def save(self, force_update=True, *args, **kwargs):
         discount = self.discount
         price = self.price
         discount_price = price - ((price * discount) / 100)
-        self.discount_price = discount_price
+        self.discount_price = float('{:.2f}'.format(discount_price))
         super(Product, self).save(*args, **kwargs)
 
 

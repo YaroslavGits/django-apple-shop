@@ -37,7 +37,7 @@ class Order(models.Model):
     customer_email = models.EmailField(blank=True, null=True, default=None)
     customer_number = models.CharField(max_length=100, blank=True, null=True, default=None)
     customer_address = models.CharField(max_length=100, blank=True, null=True, default=None)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.FloatField(blank=True, null=True,  default=0)
     status = models.ForeignKey(Status, blank=True, null=True, default=None)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -93,9 +93,9 @@ class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, default=None)
     product_status = models.BooleanField(default=True)
     product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    price_for_one = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_for_one = models.FloatField(blank=True, null=True,  default=0)
     number = models.IntegerField(blank=True, null=True, default=1)
-    price_all = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_all = models.FloatField(blank=True, null=True,  default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -107,8 +107,9 @@ class ProductInOrder(models.Model):
         verbose_name_plural = "Selected Products"
 
     def save(self, *args, **kwargs):
-        self.price_for_one = self.product.discount_price
-        self.price_all = self.price_for_one * self.number
+        price_for_one = self.product.discount_price
+        self.price_for_one = float('{:.2f}'.format(price_for_one))
+        self.price_all = float('{:.2f}'.format(self.price_for_one * self.number))
         super(ProductInOrder, self).save(*args, **kwargs)
 
 
@@ -119,7 +120,7 @@ def product_in_oder_post_save(sender, instance, created, **kwargs):
         total_price += price.price_all
     delivery_in_order = DeliveryInOrder.objects.get(order=order)
     amount_price = total_price + delivery_in_order.delivery.price_for_delivery_type
-    instance.order.total_price = amount_price
+    instance.order.total_price = float('{:.2f}'.format(amount_price))
     instance.order.save(force_update=True)
 post_save.connect(product_in_oder_post_save, sender=ProductInOrder)
 
@@ -128,9 +129,9 @@ class ProductInBasket(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
     product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    price_for_one = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_for_one = models.FloatField(blank=True, null=True,  default=0)
     number = models.IntegerField(blank=True, null=True, default=1)
-    price_all = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_all = models.FloatField(blank=True, null=True,  default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -141,8 +142,9 @@ class ProductInBasket(models.Model):
         verbose_name_plural = "Products In Basket"
 
     def save(self, *args, **kwargs):
-        self.price_for_one = float(self.product.discount_price)
-        self.price_all = self.price_for_one * int(self.number)
+        price_for_one = float(self.product.discount_price)
+        self.price_for_one = float('{:.2f}'.format(price_for_one))
+        self.price_all = float('{:.2f}'.format(self.price_for_one * int(self.number)))
         super(ProductInBasket, self).save(*args, **kwargs)
 
 # def delivery_in_order_save(sender, instance, created, **kwargs):
