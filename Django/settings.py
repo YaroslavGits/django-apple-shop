@@ -25,7 +25,8 @@ SECRET_KEY = 'ilpcx5d2ki_oldh@%z%2l=%8&wx%-zgd$$gn9mdi0e5igf*1i!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["appleshopdjango.pythonanywhere.com", ]
+# ALLOWED_HOSTS = ["appleshopdjango.pythonanywhere.com", ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -143,9 +144,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static",)
 ]
 
-STATIC_ROOT = "/home/appleshopdjango/Django_env/Django/static"
+STATIC_ROOT = "/home/appleshopdjango/Django_env/Django/django-apple-shop/static"
 
-MEDIA_ROOT = "/home/appleshopdjango/Django_env/Django/static/media"
+MEDIA_ROOT = "/home/appleshopdjango/Django_env/Django/django-apple-shop/static/media"
 
 MEDIA_URL = '/media/'
 

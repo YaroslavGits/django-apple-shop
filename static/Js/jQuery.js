@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(window).load(function(){
     $('form').each(function (i, e) {
         if ($(this).data('product_id')){
                 $(this).on('submit', function (e) {
@@ -132,14 +132,14 @@ $(document).ready(function () {
     Total_basket_amount();
 
     function Total_amount() {
-        var amount =parseFloat($('.price_for_delivery_type').text().replace(',', '.'));
+        var amount =parseFloat($('.price_for_delivery_type').text().replace(',', '.')).toFixed(2);
         if ($('#form_contact').data('total_price')!=undefined){
-            var total_price = parseFloat($('#form_contact').data('total_price').replace(',', '.'));
+            var total_price = parseFloat($('#form_contact').data('total_price'));
         }
         else {
             var total_price = parseFloat($('#form_contact').data('total_price'));
         }
-        var total_amount = amount + total_price;
+        var total_amount = parseFloat(amount) + parseFloat(total_price);
         $('.amount_price').html('');
         $('.amount_price').append('<h4>'+ total_amount +'</h4>');
     }

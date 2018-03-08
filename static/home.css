@@ -363,11 +363,13 @@ a{
      position: absolute;
      margin-top: 250px;
      left: 0;
+     color: #2e9419;
  }
  .slick-next{
      position: absolute;
      margin-top: 250px;
      right: 0;
+     color: #2e9419;
  }
  .slider a{
      text-decoration: none;

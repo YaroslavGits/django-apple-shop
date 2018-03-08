@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import post_save
+from _decimal import Decimal
 
 # Create your models here.
 class Category(models.Model):
@@ -32,6 +33,13 @@ class Product(models.Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
+    def save(self, *args, **kwargs):
+        discount = self.discount
+        price = self.price
+        discount_price = price - ((price * discount) / 100)
+        self.discount_price = discount_price
+        super(Product, self).save(*args, **kwargs)
+
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, blank=True, null=True, default=None)
@@ -48,11 +56,11 @@ class ProductImage(models.Model):
         verbose_name_plural = "Product Images"
 
 
-def product_post_save(sender, instance, created, **kwargs):
-    discount = instance.discount
-    price = instance.price
-    discount_price = price - ((price * discount) / 100)
-    print(price)
-    instance.discount_price = discount_price
-    instance.save(force_update=True)
-post_save.connect(product_post_save, sender=Product)
+# def product_post_save(sender, instance, created, update_fields, **kwargs):
+#     discount = instance.discount
+#     price = instance.price
+#     discount_price = price - ((price * discount) / 100)
+#     print(discount_price)
+#     instance.discount_price = discount_price
+#     return update_fields.discount_price
+# post_save.connect(product_post_save, sender=Product)
