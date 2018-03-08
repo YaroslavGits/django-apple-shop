@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(window).load(function(){
     $('form').each(function (i, e) {
         if ($(this).data('product_id')){
                 $(this).on('submit', function (e) {
@@ -139,7 +139,7 @@ $(document).ready(function () {
         else {
             var total_price = parseFloat($('#form_contact').data('total_price'));
         }
-        var total_amount = parseFloat(amount) + parseFloat(total_price);
+        var total_amount = parseFloat(parseFloat(amount) + parseFloat(total_price)).toFixed(2);
         $('.amount_price').html('');
         $('.amount_price').append('<h4>'+ total_amount +'</h4>');
     }
@@ -207,6 +207,38 @@ $(document).ready(function () {
         sliderJS(obj, sl);
         return false;
     });
+    $('#form_contact').validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 3
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phone: {
+                required: true,
+                minlength: 11
+            },
+            address: {
+                required: true,
+                minlength: 3
+            }
+        },
+        errorPlacement: function(error,element) {
+            error.insertAfter(element)
+         }
+    });
+    $('#form_contact').on('change', function () {
+        if ($('#form_contact').valid()){
+            $('#form_contact').attr({'action': '/payment/'})
+        }else {
+            $('#form_contact').attr({'action': ' '})
+        }
+    });
+
+
     $('#payment').on('submit', function () {
         alert('Thank you for your order.\n We will get in touch with youp soon:)')
     });

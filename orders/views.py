@@ -63,6 +63,7 @@ def contact(request):
 
                 product_in_basket.number = value
                 product_in_basket.save(force_update=True)
+
     return render(request, 'orders/Contacts.html', locals())
 
 def payment(request):
