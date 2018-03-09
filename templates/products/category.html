@@ -83,7 +83,7 @@
                                 <a href="{% url 'product' prodimg.product.id %}">
                                     <h3 class="text">{{ prodimg.product.name }}</h3>
                                     <div class="description">
-                                        <h5>{{ prodimg.product.description|truncatechars_html:600 }}</h5>
+                                        <h5>{{ prodimg.product.description|truncatewords_html:35 }}</h5>
                                     </div>
                                 </a>
                             </div>
