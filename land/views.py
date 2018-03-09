@@ -12,8 +12,8 @@ def test(request):
     return render(request, 'land/test.html', locals())
 
 def home(request):
-    product_image = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active=True, product__category_id=2)
-    products_image = ProductImage.objects.filter(is_active=True, is_main=True , product__is_active=True)
+    product_image = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active=True, product__category_id=2)[0:4]
+    products_image = ProductImage.objects.filter(is_active=True, is_main=True , product__is_active=True)[0:4]
     category = Category.objects.filter(is_active=True)
     products = Product.objects.filter(is_active=True)
     return render(request, 'land/home.html', locals())
