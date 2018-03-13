@@ -561,6 +561,9 @@ a{
     text-decoration: none;
     color: black;
 }
-.filter_place{
+.filter_place {
     margin-bottom: 20px;
+}
+.name, .email, .phone, .address{
+    padding: 15px;
 }
